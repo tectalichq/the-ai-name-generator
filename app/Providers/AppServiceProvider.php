@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Client::class, function ($app) {
+        $this->app->singleton(Client::class, function () {
             // Build the Tectalic OpenAI REST API Client globally.
             $token = config('services.openai.token');
             assert(is_string($token));

@@ -5,3 +5,5 @@ parameters:
         - app
         - tests
     level: 9
+    scanFiles:
+        - vendor/tectalic/openai/tests/MockHttpClient.php
