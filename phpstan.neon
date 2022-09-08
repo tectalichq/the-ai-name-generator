@@ -5,3 +5,8 @@ parameters:
         - app
         - tests
     level: 9
+    ignoreErrors:
+        -
+            message: "#^Call to an undefined method Mockery\\\\ExpectationInterface\\|Mockery\\\\HigherOrderMessage\\:\\:once\\(\\)\\.$#"
+            count: 1
+            path: tests/Feature/Livewire/NameGeneratorTest.php
