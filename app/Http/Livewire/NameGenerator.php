@@ -3,9 +3,11 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\In;
 use Livewire\Component;
+use Orhanerday\OpenAi\OpenAi;
 
 class NameGenerator extends Component
 {
@@ -507,16 +509,42 @@ class NameGenerator extends Component
     /**
      * When the form is submitted.
      */
-    public function generateNames(): void
+    public function generateNames(OpenAi $openAi): void
     {
         $validated = $this->validate();
 
         $this->clearValidation();
 
-        // TODO: Query OpenAI for the suggested business names and taglines based on the user's input.
-        $this->names = [
-            sprintf('%s Name 1', $validated['concept']),
-            sprintf('%s Name 2', $validated['concept']),
-        ];
+        $prompt = sprintf(
+            'Give me a business name and tagline for a company in the %s industry with a %s concept',
+            $validated['industry'],
+            $validated['concept'],
+        );
+
+        // Query OpenAI for the results.
+
+        $result = $openAi->complete([
+            'engine' => 'text-davinci-002',
+            'prompt' => $prompt,
+            'n' => 5,
+            'max_tokens' => 2048,
+        ]);
+
+        if (!is_string($result)) {
+            // Error querying OpenAI.
+
+            // Clear any existing results and display an error message.
+            $this->reset(['names']);
+            $this->addError('results', __('Results are temporarily unavailable. Please try again later.'));
+            return;
+        }
+
+        $jsonResult = json_decode($result);
+        if ($jsonResult && is_object($jsonResult) && isset($jsonResult->choices) && is_array($jsonResult->choices)) {
+            // Use only the text from each Completion.
+            $this->names = Arr::map($jsonResult->choices, function ($choice) {
+                return $choice->text;
+            });
+        }
     }
 }
