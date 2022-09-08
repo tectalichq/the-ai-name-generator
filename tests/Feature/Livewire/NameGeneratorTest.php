@@ -4,6 +4,8 @@ namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\NameGenerator;
 use Livewire\Livewire;
+use Mockery\MockInterface;
+use Orhanerday\OpenAi\OpenAi;
 use Tests\TestCase;
 
 class NameGeneratorTest extends TestCase
@@ -23,6 +25,17 @@ class NameGeneratorTest extends TestCase
 
     public function test_submit(): void
     {
+        // Ensure the Laravel Service Container returns a mocked OpenAI client rather than the Client registered
+        // in \App\Providers\AppServiceProvider::register().
+        $this->app->singleton(OpenAi::class, function () {
+            // Mock the completions response
+            return $this->partialMock(OpenAi::class, function (MockInterface $mock) {
+                $mock->shouldReceive('complete')
+                     ->once()
+                     ->andReturn('{"choices":[{"text":"Name 1"},{"text":"Name 2"}]}');
+            });
+        });
+
         Livewire::test(NameGenerator::class)
                 ->fill([
                     'industry' => 'Computer Software',
@@ -31,10 +44,10 @@ class NameGeneratorTest extends TestCase
                 ->call('generateNames')
                 ->assertHasNoErrors()
                 ->assertSet('names', [
-                    'Humorous Name 1',
-                    'Humorous Name 2',
+                    'Name 1',
+                    'Name 2',
                 ])
-        ->assertSee('Humorous Name 1')
-        ->assertSee('Humorous Name 2');
+        ->assertSee('Name 1')
+        ->assertSee('Name 2');
     }
 }
