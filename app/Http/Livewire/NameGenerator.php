@@ -526,8 +526,7 @@ class NameGenerator extends Component
         );
 
         try {
-            // Query OpenAI for the results.
-
+            // Query the OpenAI API for the results.
             /** @var CreateResponse $result */
             $result = $client->completions()->create(
                 new CreateRequest([
@@ -538,13 +537,12 @@ class NameGenerator extends Component
                 ])
             )->toModel();
 
-            // Use only the text from each Completion.
+            // Transform the result, as we only need to use the text from each completion choice.
             $this->names = Arr::map($result->choices, function (CreateResponseItem $item) {
                 return $item->text;
             });
         } catch (ClientException $exception) {
             // Error querying OpenAI.
-
             // Clear any existing results and display an error message.
             $this->reset(['names']);
             $this->addError('results', __('Results are temporarily unavailable. Please try again later.'));
