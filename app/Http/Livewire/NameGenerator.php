@@ -11,7 +11,7 @@ use Tectalic\OpenAi\Client;
 use Tectalic\OpenAi\ClientException;
 use Tectalic\OpenAi\Models\Completions\CreateRequest;
 use Tectalic\OpenAi\Models\Completions\CreateResponse;
-use Tectalic\OpenAi\Models\Completions\CreateResponseItem;
+use Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItem;
 
 class NameGenerator extends Component
 {
@@ -328,7 +328,7 @@ class NameGenerator extends Component
             /** @var CreateResponse $result */
             $result = $request->toModel();
             // Transform the result, as we only need to use the text from each completion choice.
-            $this->names = Arr::map($result->choices, function (CreateResponseItem $item) {
+            $this->names = Arr::map($result->choices, function (CreateResponseChoicesItem $item) {
                 return $item->text;
             });
         } catch (ClientException $e) {

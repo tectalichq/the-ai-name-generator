@@ -5633,16 +5633,16 @@
         },
         {
             "name": "tectalic/openai",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tectalichq/public-openai-client-php.git",
-                "reference": "ac96f7d56bf12db601b268f5095b41d3ab405dc2"
+                "reference": "274277f5473bb9e8ee030d73fbb79556373789a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tectalichq/public-openai-client-php/zipball/ac96f7d56bf12db601b268f5095b41d3ab405dc2",
-                "reference": "ac96f7d56bf12db601b268f5095b41d3ab405dc2",
+                "url": "https://api.github.com/repos/tectalichq/public-openai-client-php/zipball/274277f5473bb9e8ee030d73fbb79556373789a0",
+                "reference": "274277f5473bb9e8ee030d73fbb79556373789a0",
                 "shasum": ""
             },
             "require": {
@@ -5680,9 +5680,9 @@
             "description": "Tectalic OpenAI REST API Client",
             "homepage": "https://tectalic.com/apis/openai",
             "support": {
-                "source": "https://github.com/tectalichq/public-openai-client-php/tree/v1.0.0"
+                "source": "https://github.com/tectalichq/public-openai-client-php/tree/v1.0.1"
             },
-            "time": "2022-09-21T06:55:53+00:00"
+            "time": "2022-10-24T02:20:38+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
