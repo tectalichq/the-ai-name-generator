@@ -317,7 +317,7 @@ class NameGenerator extends Component
 
         $request = $client->completions()->create(
             new CreateRequest([
-                'model'      => 'text-davinci-002',
+                'model'      => 'text-davinci-003',
                 'prompt'     => $prompt,
                 'max_tokens' => 2048,
                 'n'          => 5 // 5 completions
