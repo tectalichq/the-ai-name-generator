@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8bd2cfdd3542d57065894473d34f8fc",
+    "content-hash": "c93008b1b251b74e6e6987aa09c65ca3",
     "packages": [
         {
             "name": "brick/math",
@@ -5580,16 +5580,16 @@
         },
         {
             "name": "tectalic/openai",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tectalichq/public-openai-client-php.git",
-                "reference": "8329e622f6f143c379569f1e29e370fa4fd933fa"
+                "reference": "36f7925ac091c63c1a3721e633d417e8f578c7b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tectalichq/public-openai-client-php/zipball/8329e622f6f143c379569f1e29e370fa4fd933fa",
-                "reference": "8329e622f6f143c379569f1e29e370fa4fd933fa",
+                "url": "https://api.github.com/repos/tectalichq/public-openai-client-php/zipball/36f7925ac091c63c1a3721e633d417e8f578c7b2",
+                "reference": "36f7925ac091c63c1a3721e633d417e8f578c7b2",
                 "shasum": ""
             },
             "require": {
@@ -5611,7 +5611,7 @@
                 "mikey179/vfsstream": "^1.6.10",
                 "php-http/mock-client": "^1.5",
                 "phpstan/phpstan": "^1.4",
-                "phpunit/phpunit": "^8.5.14 || ^9.5",
+                "phpunit/phpunit": "^8.5.14 || ^9.5 || ^10.0",
                 "squizlabs/php_codesniffer": "^3.6",
                 "symfony/http-client": "^5.3"
             },
@@ -5628,9 +5628,10 @@
             "license": [
                 "MIT"
             ],
-            "description": "An OpenAI REST API Client with GPT-3, Codex and DALL·E support. Includes fully typed Data Transfer Objects (DTOs) for all requests and responses and IDE autocomplete support.",
+            "description": "An OpenAI REST API Client with ChatGPT, GPT-3, Codex, DALL·E and Whisper support. Includes fully typed Data Transfer Objects (DTOs) for all requests and responses and IDE autocomplete support.",
             "homepage": "https://tectalic.com/apis/openai",
             "keywords": [
+                "ChatGpt",
                 "GPT-3",
                 "ai",
                 "api",
@@ -5639,13 +5640,13 @@
                 "gpt3",
                 "openai",
                 "rest",
-                "tectalic"
+                "tectalic",
+                "whisper"
             ],
             "support": {
-                "issues": "https://github.com/tectalichq/public-openai-client-php/issues",
-                "source": "https://github.com/tectalichq/public-openai-client-php/tree/v1.3.0"
+                "source": "https://github.com/tectalichq/public-openai-client-php/tree/v1.4.0"
             },
-            "time": "2022-12-21T06:13:12+00:00"
+            "time": "2023-03-02T02:09:20+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

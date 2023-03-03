@@ -9,9 +9,9 @@ use Illuminate\Validation\Rules\In;
 use Livewire\Component;
 use Tectalic\OpenAi\Client;
 use Tectalic\OpenAi\ClientException;
-use Tectalic\OpenAi\Models\Completions\CreateRequest;
-use Tectalic\OpenAi\Models\Completions\CreateResponse;
-use Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItem;
+use Tectalic\OpenAi\Models\ChatCompletions\CreateRequest;
+use Tectalic\OpenAi\Models\ChatCompletions\CreateResponse;
+use Tectalic\OpenAi\Models\ChatCompletions\CreateResponseChoicesItem;
 
 class NameGenerator extends Component
 {
@@ -310,17 +310,22 @@ class NameGenerator extends Component
         $this->clearValidation();
 
         $prompt = sprintf(
-            'Give me a business name and tagline for a company in the %s industry with a %s concept',
+            'Suggest one compelling business name and tagline for a company in the %s industry with a %s concept',
             $validated['industry'],
             $validated['concept'],
         );
 
-        $request = $client->completions()->create(
+        $request = $client->chatCompletions()->create(
             new CreateRequest([
-                'model'      => 'text-davinci-003',
-                'prompt'     => $prompt,
-                'max_tokens' => 2048,
-                'n'          => 5 // 5 completions
+                'model'    => 'gpt-3.5-turbo',
+                'messages' => [
+                    [
+                        'role'    => 'system',
+                        'content' => 'You are a helpful assistant that provides clever business name and tagline ideas.',
+                    ],
+                    ['role' => 'user', 'content' => $prompt],
+                ],
+                'n'        => 5, // 5 completions
             ])
         );
 
@@ -329,7 +334,7 @@ class NameGenerator extends Component
             $result = $request->toModel();
             // Transform the result, as we only need to use the text from each completion choice.
             $this->names = Arr::map($result->choices, function (CreateResponseChoicesItem $item) {
-                return $item->text;
+                return $item->message->content;
             });
         } catch (ClientException $e) {
             // Error querying OpenAI.
