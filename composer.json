@@ -11,7 +11,7 @@
         "laravel/sanctum": "^3.2.1",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.11.2",
-        "tectalic/openai": "^1.3"
+        "tectalic/openai": "^1.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.21.0",
